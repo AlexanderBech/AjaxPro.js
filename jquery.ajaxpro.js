@@ -1,7 +1,7 @@
 /* =========================================================
 *	AjaxPro.js 1.0
 *	Author: Alexander Bech / www.alexanderbech.com
-*	http://github.com/AlexanderBech/jquery-ajaxpro
+*	http://github.com/AlexanderBech/AjaxPro.js
 * ========================================================== */
 (function ($) {
 
