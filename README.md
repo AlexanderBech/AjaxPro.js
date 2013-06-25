@@ -5,7 +5,7 @@ Ajax POST and GET functions with simple callback methods
 
 Usage
 ==================
-Include jQuery 1.7+ and jquery.ajaxpro.min.js in your layout and use either GET or POST functions like so:
+Include jQuery 1.7+ and jquery.ajaxpro.min.js in your layout and use GET/POST functions like so:
 ```javascript
 	$(document).ready(function(){
 
