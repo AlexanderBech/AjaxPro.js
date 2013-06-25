@@ -6,7 +6,7 @@
 (function ($) {
 
 	var $listener 	= $({}),
-		ajaxUrl 	= {};
+		ajaxUrl 	= 'yoururl.com/ajax';
 
 	/*
 	*	AJAX GET
