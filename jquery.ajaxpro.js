@@ -4,81 +4,35 @@
 *	http://github.com/AlexanderBech/AjaxPro.js
 * ========================================================== */
 (function ($) {
-
-	var $listener 	= $({}),
-		ajaxUrl 	= 'yoururl.com/ajax';
-
+	var $listener 	= $({});
 	/*
-	*	AJAX GET
+	*	AJAX CALL
 	*/
-	window.ajaxGet = function(url, $target, callBack, sendData){
-		var callBack = callBack || 'ajaxCallback';
+	window.ajaxPro = function(type, controller, $target, sendData, trigger, errorTrigger){
+		var type = type || 'GET';
+		var trigger = trigger || 'AjaxDone';
+		var errorTrigger = errorTrigger || false;
 		$.ajax({
-			type: "GET",
-			url: url,
+			type: type,
+			url: controller,
 			data: sendData,
 			dataType: 'json'
 		})
 		.done(function(data, textStatus, jqXHR){
 			if(data != null){
-				$target.trigger({ type:callBack, 'jsonData':data });
-				$target.off(callBack);
+				$target.trigger({ type:trigger, 'jsonData':data });
+				$target.off(trigger);
 			} else {
-				alert(data);
+				if(errorTrigger){
+					$target.trigger({ type:errorTrigger });
+					$target.off(errorTrigger);
+				} else {
+					alert('Error');
+				}
 			}
 		})
-		.fail(function(jqXHR, textStatus, errorThrown){ alert(errorThrown); });
-		//.always(function(){ alert('always'); });
-	}
-
-	/*
-	*	AJAX POST
-	*/
-	window.ajaxPost = function(url, $target, callBack, sendData){
-		var callBack = callBack || 'ajaxCallback';
-		$.ajax({
-			type: "POST",
-			url: url,
-			data: sendData,
-			dataType: 'json'
-		})
-		.done(function(data, textStatus, jqXHR){
-			if(data != null){
-				$target.trigger({ type:callBack, 'jsonData':data });
-				$target.off(callBack);
-			} else {
-				alert(data);
-			}
-		})
-		.fail(function(jqXHR, textStatus, errorThrown){ alert(errorThrown); });
-		//.always(function(){ alert('always'); });
-	}
-
-	/* ----------------------------------------------------------------------------
-	 *	Document ready
-	/* ---------------------------------------------------------------------------*/
-	$(document).ready(function(){
-
-		/*
-		* EXAMPLE CALLBACK
-		*/
-		$listener.on('getCallback', function(e){
-			alert(e.jsonData);
+		.fail(function(jqXHR, textStatus, errorThrown){
+			alert(errorThrown);
 		});
-
-		/*
-		*	EXAMPLE AJAX GET - ajaxGet(<url>, <listener that contains callback>, <callback name>, <data object to send>);
-		*/
-		ajaxGet(ajaxUrl, $listener, "getCallback", {'example': 'data to send'});
-
-		/*
-		*	... And exactly the same if you want to use the POST function
-		*/
-		$listener.on('postCallback', function(e){
-			alert(e.jsonData);
-		});
-		ajaxPost(ajaxUrl, $listener, "postCallback", {'example': 'data to send'});
-
-	});
-
+	}
 })(jQuery);
