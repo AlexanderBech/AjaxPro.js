@@ -5,7 +5,9 @@ AjaxPro function with simple callback methods
 
 Usage
 ==================
+
 Include jQuery 1.7+ and jquery.ajaxpro.js in your layout and use either GET or POST functions like so:
+
 ```javascript
 	$(document).ready(function(){
 
