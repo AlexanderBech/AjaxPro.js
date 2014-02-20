@@ -8,19 +8,21 @@
 	/*
 	*	AJAX CALL
 	*/
-	window.ajaxPro = function(type, controller, $target, sendData, trigger, errorTrigger){
+	window.ajaxPro = function(type, controller, $target, sendData, trigger, errorTrigger, getContents){
         var type = type || 'GET';
         var controller = controller || null;
         var $target = $target || null;
         var sendData = sendData || {};
         var trigger = trigger || 'AjaxDone';
         var errorTrigger = errorTrigger || false;
-        var ajaxSettings = {
-            type: type,
-            url: controller,
-            data: sendData,
-            dataType: 'json'
-        };
+        var getContents = getContents || false;
+        var ajaxSettings = { type: type, url: controller };
+        if(getContents){
+            ajaxSettings.context = document.body;
+        } else {
+            ajaxSettings.data = sendData;
+            ajaxSettings.dataType = 'json';
+        }
         $.ajax(ajaxSettings)
         .done(function(data, textStatus, jqXHR){
             if(data != null){
